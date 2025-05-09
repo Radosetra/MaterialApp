@@ -1,10 +1,13 @@
 package com.example.materialapp.presentation.ui
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -18,11 +21,12 @@ import com.example.materialapp.data.model.Material
 import com.example.materialapp.data.model.MaterialState
 
 @Composable
-fun MaterialCard(material: Material) {
+fun MaterialCard(material: Material, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(80.dp)
+            .clickable { onClick() },
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = when (material.state) {
@@ -34,18 +38,28 @@ fun MaterialCard(material: Material) {
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = material.design,
-                style = MaterialTheme.typography.titleMedium,
+            Column(
                 modifier = Modifier.weight(1f)
-            )
+            ){
+                Text(
+                    text = "ID° ${material.id}",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = material.design,
+                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.secondary)
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
             Text(
-                text = "Qty: ${material.quantity}",
-                style = MaterialTheme.typography.bodyMedium
+                text = material.quantity.toString(),
+                style = MaterialTheme.typography.bodyLarge
             )
         }
     }

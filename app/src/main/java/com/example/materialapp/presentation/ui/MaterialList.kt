@@ -11,11 +11,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.materialapp.data.model.Material
 
 import com.example.materialapp.presentation.viewmodel.MaterialViewModel
 
 @Composable
-fun MaterialList(viewModel: MaterialViewModel) {
+fun MaterialList(
+    viewModel: MaterialViewModel,
+    onMaterialClick: (Material) -> Unit
+    ) {
     val materials by viewModel.materialList.collectAsState()
 
     LazyColumn(
@@ -24,8 +28,8 @@ fun MaterialList(viewModel: MaterialViewModel) {
             .padding(16.dp)
     ) {
         items(materials) { material ->
-            MaterialCard(material = material)
-            Spacer(modifier = Modifier.height(8.dp))
+            MaterialCard(material = material, onClick = { onMaterialClick(material) })
+            Spacer(modifier = Modifier.height(12.dp))
         }
     }
 }
