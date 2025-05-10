@@ -22,6 +22,7 @@ class MaterialViewModel(
         list.groupingBy { it.state }.eachCount()
     }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
+
     init {
         loadMaterials()
     }
@@ -33,4 +34,6 @@ class MaterialViewModel(
             }
         }
     }
+
+
 }

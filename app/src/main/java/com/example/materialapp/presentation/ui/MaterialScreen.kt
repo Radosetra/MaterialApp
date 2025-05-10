@@ -1,6 +1,5 @@
 package com.example.materialapp.presentation.ui
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +25,7 @@ fun MaterialScreen(viewModel: MaterialViewModel){
     var showDialog by remember { mutableStateOf(false) }
     var selectedMaterial by remember { mutableStateOf<Material?>(null) }
     var showSheet by remember { mutableStateOf(false) }
+    val stateCounts by viewModel.stats.collectAsState()
 
     if (showSheet && selectedMaterial != null) {
         ModalBottomSheet(
@@ -117,6 +117,9 @@ fun MaterialScreen(viewModel: MaterialViewModel){
         Box(modifier = Modifier.padding(padding)){
             Column(modifier = Modifier
                 .fillMaxSize()) {
+//                PieChartCanvas(stateCounts)
+//                StatCardList(stateCounts)
+                Overview(stateCounts = stateCounts)
                 MaterialList(
                     viewModel = viewModel,
                     onMaterialClick = {

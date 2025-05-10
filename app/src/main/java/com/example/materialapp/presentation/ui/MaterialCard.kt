@@ -19,6 +19,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.materialapp.data.model.Material
 import com.example.materialapp.data.model.MaterialState
+import com.example.materialapp.ui.theme.Damaged
+import com.example.materialapp.ui.theme.DamagedLigth
+import com.example.materialapp.ui.theme.Good
+import com.example.materialapp.ui.theme.GoodLigth
+import com.example.materialapp.ui.theme.Unusabel
+import com.example.materialapp.ui.theme.UnusabelLigth
 
 @Composable
 fun MaterialCard(material: Material, onClick: () -> Unit) {
@@ -30,9 +36,9 @@ fun MaterialCard(material: Material, onClick: () -> Unit) {
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(
             containerColor = when (material.state) {
-                MaterialState.Good -> Color(0xFFE0F7FA)
-                MaterialState.Damaged -> Color(0xFFFFF3E0)
-                MaterialState.Unusable -> Color(0xFFFFEBEE)
+                MaterialState.Good -> GoodLigth
+                MaterialState.Damaged -> DamagedLigth
+                MaterialState.Unusable -> UnusabelLigth
             }
         )
     ) {
