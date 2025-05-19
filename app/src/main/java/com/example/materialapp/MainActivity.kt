@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.materialapp.data.repository.MaterialRepository
 import com.example.materialapp.presentation.ui.MaterialScreen
 import com.example.materialapp.presentation.viewmodel.MaterialViewModel
 import com.example.materialapp.ui.theme.MaterialAppTheme
@@ -17,12 +16,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Create the repository manually
-        val repository = MaterialRepository()
-
         // Create the ViewModel using the factory
 
-        val viewModel = MaterialViewModel(repository)
+        val viewModel = MaterialViewModel()
 
         setContent {
             MaterialTheme {

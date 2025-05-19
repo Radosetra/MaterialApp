@@ -20,7 +20,7 @@ fun MaterialList(
     viewModel: MaterialViewModel,
     onMaterialClick: (Material) -> Unit
     ) {
-    val materials by viewModel.materialList.collectAsState()
+    val materials by viewModel.materials.collectAsState()
 
     LazyColumn(
         modifier = Modifier

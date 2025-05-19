@@ -13,7 +13,6 @@ import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import com.example.materialapp.presentation.viewmodel.MaterialViewModel
 import androidx.compose.runtime.*
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.materialapp.R
@@ -89,7 +88,7 @@ fun MaterialScreen(viewModel: MaterialViewModel){
                         Spacer(modifier = Modifier.weight(1f))
                         Button(
                             text = "Delete",
-                            onClick = { /*TODO*/ },
+                            onClick = { viewModel.deleteMaterial(selectedMaterial!!.id) },
                             backgroundColor = Color(0xFFFECDCD),
                             iconRes = R.drawable.trash
                         )
@@ -132,11 +131,16 @@ fun MaterialScreen(viewModel: MaterialViewModel){
 
         if (showDialog) {
             DialogForm(
-                designation = if (selectedMaterial == null) "" else selectedMaterial!!.design,
-                quantity = if (selectedMaterial == null) "0" else selectedMaterial!!.quantity.toString(),
+                selectedMaterial = selectedMaterial,
                 onDismiss = { showDialog = false },
-                onConfirm = {
-                    // Handle save logic here
+                onConfirm = { material ->
+                    if (selectedMaterial == null) {
+                        // Create
+                        viewModel.addMaterial(material)
+                    } else {
+                        // Update
+                        viewModel.updateMaterial(selectedMaterial!!.id, material)
+                    }
                     showDialog = false
                 }
             )
